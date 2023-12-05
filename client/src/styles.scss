@@ -10,13 +10,26 @@ $lightGreen: #b9e7e7;
       color: inherit;
     }
 
+
     //Login & Register
+    .heading-logo{
+      background-color: #b9e7e7;
+      display: flex;
+      align-items: center; /* Vertical center alignment */
+      justify-content: center; /* Horizontal center alignment */
+      height: 23vh; /* Set a specific height for the container */
+
+      img:hover{
+        cursor:pointer;
+      }
+    }
+
     .auth {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      height: 77vh;
       background-color: #b9e7e7;
 
       h1 {
