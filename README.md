@@ -1,4 +1,4 @@
-# blog_website
+# Blubber - A Simple Blog Website
 A simple CRUD Blog website with ReactJs and NodeJS
 
 // npm start to run the client
