@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
-import Logo from '../images/8002368.jpg'
+import Logo from '../images/logo_png.png'
 import { Link, useNavigate } from 'react-router-dom'
+import { TbBrandBlogger, TbTextSize } from "react-icons/tb";
 import { AuthContext } from '../context/authContext'
 import login from '../pages/Login'
 
@@ -11,7 +12,7 @@ const Navbar = () => {
 
   const handleClick = () => {
     logout();
-    navigate("/login");
+    navigate("/");
 
   }
 

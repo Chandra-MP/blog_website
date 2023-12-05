@@ -79,5 +79,6 @@ export const logout = (req, res) => {
         domain: "localhost", // set the domain of the cookie
         path: "/", // set the path of the cookie
              // set the expiration date of the cookie to the past
+             //bandi gand moti, aata birthquake
     }).status(200).json("User has been Logged Out!");
 }

@@ -15,18 +15,19 @@ const Single = () => {
   const [post, setPost] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
-  const {currentUser} = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext)
 
   const postId = location.pathname.split("/")[2]
-  // console.log(postId)
+  console.log(postId)
 
-  useEffect(()=>{
-    const fetchData  = async ()=>{
-      try{
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
         const res = await axios.get(`http://localhost:8800/api/posts/${postId}`);
+        //Here we set the post variable
         setPost(res.data);
-        // console.log(res.data)
-      }catch(err){
+        console.log(res.data)
+      } catch (err) {
         console.log(err);
       }
     };
@@ -34,12 +35,12 @@ const Single = () => {
   }, [postId]);
 
   const handleDelete = async () => {
-    try{
+    try {
       await axios.delete(`http://localhost:8800/api/posts/${postId}`, {
         withCredentials: true
       });
       navigate("/")
-    }catch(err) {console.log(err);}
+    } catch (err) { console.log(err); }
   }
 
   const getText = (html) => {
@@ -59,7 +60,7 @@ const Single = () => {
             <p>Posted {moment(post.date).fromNow()}</p>
           </div>
           {currentUser.username === post.username && <div className='edit'>
-            <Link to={`/write?edit=2`} state = {post}>
+            <Link to={`/write?edit=2`} state={post}>
               <img src={Edit} alt=''></img>
             </Link>
             <img src={Delete} alt='' onClick={handleDelete}></img>
@@ -68,7 +69,7 @@ const Single = () => {
         <h1>{post.title}</h1>
         {getText(post.post_desc)}
       </div>
-      <Menu cat={post.cat}/>
+      <Menu cat={post.cat} />
     </div>
   )
 }

@@ -15,7 +15,8 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random()*1E9)
-        cb(null, Date.now() + file.originalname)
+        const encodedFileName = encodeURIComponent(file.originalname);
+        cb(null, Date.now() + encodedFileName)
     }
 })
 const upload  = multer({ storage: storage })
@@ -45,6 +46,8 @@ app.post('/api/upload', upload.single('file'), function (req, res, next) {
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
     res.header('Access-Control-Allow-Credentials', true);
     res.status(200).json(file.filename);
+
+    console.log("Image Uploaded Sucessfully!")
     next();
 })
 

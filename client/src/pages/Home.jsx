@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/home.scss'
 
 const Home = () => {
 
   const [posts, setPosts] = useState([])
 
   const cat = useLocation().search;
-  // console.log(cat);
+  console.log(cat);
   const axiosInstance = axios.create({
     withCredentials: true
   })
@@ -17,7 +18,8 @@ const Home = () => {
       try{
         const res = await axiosInstance.get(`http://localhost:8800/api/posts${cat}`);
         setPosts(res.data)
-        // console.log(res.data);  
+        console.log("This is the data coming from the server")
+        console.log(res.data);  
       }catch(err){ 
         console.log(err)
       }
@@ -25,34 +27,6 @@ const Home = () => {
     fetchData();
   }, [cat])
 
-
-
-  // const posts = [
-  //   {
-  //     id: 1,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/6489663/pexels-photo-6489663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  //     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-  //     img: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  //   },
-  // ];
 
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html")
@@ -65,7 +39,7 @@ const Home = () => {
         {posts.map(post=>(
           <div className='post' key={post.post_id}>
             <div className='img'>
-              <img src={`../uploads/${post.img}`} alt=""/>
+              {post?.img && <img src={`../uploads/${post.img}`} alt=""/>}
             </div>
             <div className='content'>
               <Link to={`/post/${post.post_id}`} className='link'>
